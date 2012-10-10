@@ -25,20 +25,20 @@ class Life
 			for row in [0..@rows]
 				livingNeighbors = @findNeighbors column, row
 				currentCell = @grid[column][row]
-				if livingNeighbors < 2 or livingNeighbors > 3
-					@newGrid[column][row] = 0
-				else if livingNeighbors == 2 or livingNeighbors == 3
-					@newGrid[column][row] = currentCell
-				else if livingNeighbors == 3 and currentCell == 0
+				if currentCell == 1 and livingNeighbors == 2 or livingNeighbors == 3
 					@newGrid[column][row] = 1
-				
+				else if currentCell == 0 and livingNeighbors == 3
+					@newGrid[column][row] = 1
+				else
+					@newGrid[column][row] = 0
+
 				if @newGrid[column][row] != currentCell
 					@dirty = true
 
 		@grid = @newGrid
 		
 		if @dirty == true
-			#@runCycle();
+			@runCycle();
 				
 	findNeighbors: (column, row)->
 		count = 0

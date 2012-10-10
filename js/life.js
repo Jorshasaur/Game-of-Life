@@ -47,12 +47,12 @@
         for (row = 0, _ref2 = this.rows; 0 <= _ref2 ? row <= _ref2 : row >= _ref2; 0 <= _ref2 ? row++ : row--) {
           livingNeighbors = this.findNeighbors(column, row);
           currentCell = this.grid[column][row];
-          if (livingNeighbors < 2 || livingNeighbors > 3) {
-            this.newGrid[column][row] = 0;
-          } else if (livingNeighbors === 2 || livingNeighbors === 3) {
-            this.newGrid[column][row] = currentCell;
-          } else if (livingNeighbors === 3 && currentCell === 0) {
+          if (currentCell === 1 && livingNeighbors === 2 || livingNeighbors === 3) {
             this.newGrid[column][row] = 1;
+          } else if (currentCell === 0 && livingNeighbors === 3) {
+            this.newGrid[column][row] = 1;
+          } else {
+            this.newGrid[column][row] = 0;
           }
           if (this.newGrid[column][row] !== currentCell) this.dirty = true;
         }

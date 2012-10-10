@@ -48,8 +48,7 @@
     beforeEach(function() {
       this.game = new JORSH.Life();
       this.game.buildTestGrid();
-      this.game.run();
-      return this.game.logGrid();
+      return this.game.run();
     });
     it("should find cell at 0,1 alive", function() {
       return expect(this.game.grid[0][1]).toEqual(1);

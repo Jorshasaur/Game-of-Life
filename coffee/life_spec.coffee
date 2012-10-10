@@ -47,7 +47,7 @@ describe "Full Cycles against Test Grid", ()->
 		@game = new JORSH.Life()
 		@game.buildTestGrid()
 		@game.run()
-		@game.logGrid()
+		#@game.logGrid()
 
 	it "should find cell at 0,1 alive", ()->
 		expect(@game.grid[0][1]).toEqual(1)
