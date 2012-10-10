@@ -18,7 +18,7 @@ describe "Setup and Reality Check", ()->
 		@game.buildTestGrid()
 		expect(@game.grid["3"]["1"]).toEqual(1)
 
-describe "Single Cycles against Test Grid", ()->
+describe "Single Cycle against Test Grid", ()->
 	@game	
 
 	beforeEach ()->
@@ -40,17 +40,91 @@ describe "Single Cycles against Test Grid", ()->
 	it "should find 3 neighbors for the cell at 2,2", ()->
 		expect(@game.findNeighbors 2,2).toEqual(3)
 
-describe "Full Cycles against Test Grid", ()->
+
+describe "Full Cycle against Test Grid", ()->
 	@game	
 
 	beforeEach ()->
 		@game = new JORSH.Life()
 		@game.buildTestGrid()
 		@game.run()
-		#@game.logGrid()
+	
+	describe "Row 0", ()->
+		it "should find cell at 0,0 dead", ()->
+			expect(@game.grid[0][0]).toEqual(0)
 
-	it "should find cell at 0,1 alive", ()->
-		expect(@game.grid[0][1]).toEqual(1)
+		it "should find cell at 1,0 dead", ()->
+			expect(@game.grid[1][0]).toEqual(0)
 
-	it "should find cell at 2,2 alive", ()->
-		expect(@game.grid[2][2]).toEqual(1)
+		it "should find cell at 2,0 dead", ()->
+			expect(@game.grid[2][0]).toEqual(0)
+
+		it "should find cell at 3,0 dead", ()->
+			expect(@game.grid[3][0]).toEqual(0)
+
+		it "should find cell at 4,0 dead", ()->
+			expect(@game.grid[4][0]).toEqual(0)
+
+	describe "Row 1", ()->
+		it "should find cell at 0,1 alive", ()->
+			expect(@game.grid[0][1]).toEqual(1)
+
+		it "should find cell at 1,1 dead", ()->
+			expect(@game.grid[1][1]).toEqual(0)
+
+		it "should find cell at 2,1 alive", ()->
+			expect(@game.grid[2][1]).toEqual(1)
+
+		it "should find cell at 3,1 alive", ()->
+			expect(@game.grid[3][1]).toEqual(1)
+
+		it "should find cell at 4,1 alive", ()->
+			expect(@game.grid[4][1]).toEqual(1)
+
+	describe "Row 2", ()->
+		it "should find cell at 0,2 alive", ()->
+			expect(@game.grid[0][2]).toEqual(1)
+
+		it "should find cell at 1,2 alive", ()->
+			expect(@game.grid[1][2]).toEqual(1)
+
+		it "should find cell at 2,2 alive", ()->
+			expect(@game.grid[2][2]).toEqual(1)
+
+		it "should find cell at 3,2 alive", ()->
+			expect(@game.grid[3][2]).toEqual(1)
+
+		it "should find cell at 4,2 alive", ()->
+			expect(@game.grid[4][2]).toEqual(1)
+
+	describe "Row 3", ()->
+		it "should find cell at 0,3 dead", ()->
+			expect(@game.grid[0][3]).toEqual(0)
+
+		it "should find cell at 1,3 alive", ()->
+			expect(@game.grid[1][3]).toEqual(1)
+
+		it "should find cell at 2,3 dead", ()->
+			expect(@game.grid[2][3]).toEqual(0)
+
+		it "should find cell at 3,3 dead", ()->
+			expect(@game.grid[3][3]).toEqual(0)
+
+		it "should find cell at 4,3 dead", ()->
+			expect(@game.grid[4][3]).toEqual(0)
+
+	describe "Row 4", ()->
+		it "should find cell at 0,4 dead", ()->
+			expect(@game.grid[0][4]).toEqual(0)
+
+		it "should find cell at 1,4 dead", ()->
+			expect(@game.grid[1][4]).toEqual(0)
+
+		it "should find cell at 2,4 dead", ()->
+			expect(@game.grid[2][4]).toEqual(0)
+
+		it "should find cell at 3,4 dead", ()->
+			expect(@game.grid[3][4]).toEqual(0)
+
+		it "should find cell at 4,4 dead", ()->
+			expect(@game.grid[4][4]).toEqual(0)			

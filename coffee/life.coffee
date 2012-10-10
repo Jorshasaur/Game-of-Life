@@ -6,42 +6,41 @@ class Life
 	constructor: (@rows, @columns)->
 		@rows ?= 4
 		@columns ?= 4
-		@dirty = false
-		@buildGrid()
+		@grid = @buildGrid()
 
 	buildGrid: ()->
-		@grid = []
+		grid = []
 		for column in [0..@columns]
-			@grid[column] = []
+			grid[column] = []
 			for row in [0..@rows]
-				@grid[column][row] = 0
+				grid[column][row] = 0
+		return grid
+
 	run: ()->
-		@newGrid = @grid
-		@runCycle();
+		@newGrid = @buildGrid()
+		@runCycle()
 
 	runCycle: ()->
-		@dirty = false;
 		for column in [0..@columns]
 			for row in [0..@rows]
 				livingNeighbors = @findNeighbors column, row
 				currentCell = @grid[column][row]
-				if currentCell == 1 and livingNeighbors == 2 or livingNeighbors == 3
-					@newGrid[column][row] = 1
-				else if currentCell == 0 and livingNeighbors == 3
-					@newGrid[column][row] = 1
-				else
-					@newGrid[column][row] = 0
+				if currentCell == 1
+					if livingNeighbors < 2
+						@newGrid[column][row] = 0
+					else if livingNeighbors == 2 or livingNeighbors == 3
+						@newGrid[column][row] = 1
+					else if livingNeighbors > 3
+						@newGrid[column][row] = 0
+				else if currentCell == 0
+					if livingNeighbors == 3
+						@newGrid[column][row] = 1	
 
-				if @newGrid[column][row] != currentCell
-					@dirty = true
-
-		@grid = @newGrid
-		
-		if @dirty == true
-			@runCycle();
+		@grid = @newGrid.slice 0
 				
 	findNeighbors: (column, row)->
 		count = 0
+		if @grid[column][row] == 1 then count = -1
 		startColumn = column - 1
 		startRow = row - 1
 		endColumn = column + 1
@@ -49,11 +48,9 @@ class Life
 		for _column in [startColumn .. endColumn]
 			if @grid[_column]?
 				for _row in [startRow .. endRow]
-					if (column + "," + row) != (_column + "," + _row)
-						cell = @grid[_column][_row]
-						#console.log _column, _row, cell
-						if cell? and cell is 1 
-							count += 1
+					cell = @grid[_column][_row]
+					if cell? and cell is 1 
+						count += 1
 
 		return count
 

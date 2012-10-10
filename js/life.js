@@ -13,57 +13,52 @@
       this.columns = columns;
       if ((_ref = this.rows) == null) this.rows = 4;
       if ((_ref2 = this.columns) == null) this.columns = 4;
-      this.dirty = false;
-      this.buildGrid();
+      this.grid = this.buildGrid();
     }
 
     Life.prototype.buildGrid = function() {
-      var column, row, _ref, _results;
-      this.grid = [];
-      _results = [];
+      var column, grid, row, _ref, _ref2;
+      grid = [];
       for (column = 0, _ref = this.columns; 0 <= _ref ? column <= _ref : column >= _ref; 0 <= _ref ? column++ : column--) {
-        this.grid[column] = [];
-        _results.push((function() {
-          var _ref2, _results2;
-          _results2 = [];
-          for (row = 0, _ref2 = this.rows; 0 <= _ref2 ? row <= _ref2 : row >= _ref2; 0 <= _ref2 ? row++ : row--) {
-            _results2.push(this.grid[column][row] = 0);
-          }
-          return _results2;
-        }).call(this));
+        grid[column] = [];
+        for (row = 0, _ref2 = this.rows; 0 <= _ref2 ? row <= _ref2 : row >= _ref2; 0 <= _ref2 ? row++ : row--) {
+          grid[column][row] = 0;
+        }
       }
-      return _results;
+      return grid;
     };
 
     Life.prototype.run = function() {
-      this.newGrid = this.grid;
+      this.newGrid = this.buildGrid();
       return this.runCycle();
     };
 
     Life.prototype.runCycle = function() {
       var column, currentCell, livingNeighbors, row, _ref, _ref2;
-      this.dirty = false;
       for (column = 0, _ref = this.columns; 0 <= _ref ? column <= _ref : column >= _ref; 0 <= _ref ? column++ : column--) {
         for (row = 0, _ref2 = this.rows; 0 <= _ref2 ? row <= _ref2 : row >= _ref2; 0 <= _ref2 ? row++ : row--) {
           livingNeighbors = this.findNeighbors(column, row);
           currentCell = this.grid[column][row];
-          if (currentCell === 1 && livingNeighbors === 2 || livingNeighbors === 3) {
-            this.newGrid[column][row] = 1;
-          } else if (currentCell === 0 && livingNeighbors === 3) {
-            this.newGrid[column][row] = 1;
-          } else {
-            this.newGrid[column][row] = 0;
+          if (currentCell === 1) {
+            if (livingNeighbors < 2) {
+              this.newGrid[column][row] = 0;
+            } else if (livingNeighbors === 2 || livingNeighbors === 3) {
+              this.newGrid[column][row] = 1;
+            } else if (livingNeighbors > 3) {
+              this.newGrid[column][row] = 0;
+            }
+          } else if (currentCell === 0) {
+            if (livingNeighbors === 3) this.newGrid[column][row] = 1;
           }
-          if (this.newGrid[column][row] !== currentCell) this.dirty = true;
         }
       }
-      this.grid = this.newGrid;
-      if (this.dirty === true) return this.runCycle();
+      return this.grid = this.newGrid.slice(0);
     };
 
     Life.prototype.findNeighbors = function(column, row) {
       var cell, count, endColumn, endRow, startColumn, startRow, _column, _row;
       count = 0;
+      if (this.grid[column][row] === 1) count = -1;
       startColumn = column - 1;
       startRow = row - 1;
       endColumn = column + 1;
@@ -71,10 +66,8 @@
       for (_column = startColumn; startColumn <= endColumn ? _column <= endColumn : _column >= endColumn; startColumn <= endColumn ? _column++ : _column--) {
         if (this.grid[_column] != null) {
           for (_row = startRow; startRow <= endRow ? _row <= endRow : _row >= endRow; startRow <= endRow ? _row++ : _row--) {
-            if ((column + "," + row) !== (_column + "," + _row)) {
-              cell = this.grid[_column][_row];
-              if ((cell != null) && cell === 1) count += 1;
-            }
+            cell = this.grid[_column][_row];
+            if ((cell != null) && cell === 1) count += 1;
           }
         }
       }

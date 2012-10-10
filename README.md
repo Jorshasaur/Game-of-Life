@@ -28,7 +28,7 @@ Will have a subsequent generation of:
 00000
 
 00000
+11011
 10011
-11001
-01000
-00000
+00011
+00001
