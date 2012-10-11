@@ -19,12 +19,20 @@ class Life
 	run: ()->
 		@newGrid = @buildGrid()
 		@runCycle()
-
+	
+	###
+	I broke runCycle out from run so I could have a method to execute on a timer for 
+	animations.  Run is like a reset, and runCycle just steps through a single generation.
+	###
 	runCycle: ()->
 		for column in [0..@columns]
 			for row in [0..@rows]
 				livingNeighbors = @findNeighbors column, row
 				currentCell = @grid[column][row]
+				###
+				These conditionals could be optimized a lot, but I like the readability of them currently.
+				It's very easy to follow the rules with the conditionals written this way.
+				###
 				if currentCell == 1
 					if livingNeighbors < 2
 						@newGrid[column][row] = 0
@@ -40,7 +48,16 @@ class Life
 				
 	findNeighbors: (column, row)->
 		count = 0
+		### 
+		I start the count at -1 for cells that are alive, so when they calculate themselves the 
+		total isn't distorted.  This could probably be optimized better too.  On larger boards 
+		it would be better to not parse the cell with its neighbors to save unnecessary work.
+		###
 		if @grid[column][row] == 1 then count = -1
+		###
+		The neighbor grid calculations could be optimized into the loops better, but I like 
+		the readability here.
+		###
 		startColumn = column - 1
 		startRow = row - 1
 		endColumn = column + 1

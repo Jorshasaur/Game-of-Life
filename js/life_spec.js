@@ -43,6 +43,11 @@
     });
   });
 
+  /*
+  I gotta test the whole grid, it's the only way to be sure.
+  http://www.youtube.com/watch?feature=player_embedded&v=2s1MspmfEwg
+  */
+
   describe("Full Cycle against Test Grid", function() {
     this.game;
     beforeEach(function() {

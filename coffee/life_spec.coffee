@@ -40,7 +40,10 @@ describe "Single Cycle against Test Grid", ()->
 	it "should find 3 neighbors for the cell at 2,2", ()->
 		expect(@game.findNeighbors 2,2).toEqual(3)
 
-
+###
+I gotta test the whole grid, it's the only way to be sure.
+http://www.youtube.com/watch?feature=player_embedded&v=2s1MspmfEwg
+###
 describe "Full Cycle against Test Grid", ()->
 	@game	
 

@@ -33,12 +33,21 @@
       return this.runCycle();
     };
 
+    /*
+    	I broke runCycle out from run so I could have a method to execute on a timer for 
+    	animations.  Run is like a reset, and runCycle just steps through a single generation.
+    */
+
     Life.prototype.runCycle = function() {
       var column, currentCell, livingNeighbors, row, _ref, _ref2;
       for (column = 0, _ref = this.columns; 0 <= _ref ? column <= _ref : column >= _ref; 0 <= _ref ? column++ : column--) {
         for (row = 0, _ref2 = this.rows; 0 <= _ref2 ? row <= _ref2 : row >= _ref2; 0 <= _ref2 ? row++ : row--) {
           livingNeighbors = this.findNeighbors(column, row);
           currentCell = this.grid[column][row];
+          /*
+          				These conditionals could be optimized a lot, but I like the readability of them currently.
+          				It's very easy to follow the rules with the conditionals written this way.
+          */
           if (currentCell === 1) {
             if (livingNeighbors < 2) {
               this.newGrid[column][row] = 0;
@@ -58,7 +67,16 @@
     Life.prototype.findNeighbors = function(column, row) {
       var cell, count, endColumn, endRow, startColumn, startRow, _column, _row;
       count = 0;
+      /* 
+      		I start the count at -1 for cells that are alive, so when they calculate themselves the 
+      		total isn't distorted.  This could probably be optimized better too.  On larger boards 
+      		it would be better to not parse the cell with its neighbors to save unnecessary work.
+      */
       if (this.grid[column][row] === 1) count = -1;
+      /*
+      		The neighbor grid calculations could be optimized into the loops better, but I like 
+      		the readability here.
+      */
       startColumn = column - 1;
       startRow = row - 1;
       endColumn = column + 1;
