@@ -1,5 +1,39 @@
+@cell_width: 100px;
+@cell_height: 100px;
+@cell_columns: 5;
+@cell_rows: 5;
+@container_width: (@cell_width + @border_width * 2) * @cell_rows;
+@container_height: (@cell_height + @border_width * 2) * @cell_columns;
+@border_width: 1px;
+
 body{
-	p{
-		font-weight: bold;
+	padding: 30px;
+}
+
+header{
+	font-size: 24px;
+	font-weight: bold;
+}
+
+#grid{
+	
+	width: @container_width;
+	height: @container_height;	
+
+
+	span{
+		width: @cell_width;
+		height: @cell_height;
+		border: @border_width solid #999;
+		display: block;
+		float: left;
+	}
+
+	.dead{
+		background-color: black;
+	}
+
+	.alive{
+		background-color: red;
 	}
 }

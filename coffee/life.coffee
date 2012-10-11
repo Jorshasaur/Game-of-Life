@@ -17,12 +17,14 @@ class Life
 		return grid
 
 	run: ()->
-		@newGrid = @buildGrid()
+		@reset()
 		@runCycle()
-	
+
+	reset: ()->
+		@newGrid = @buildGrid()
+
 	###
-	I broke runCycle out from run so I could have a method to execute on a timer for 
-	animations.  Run is like a reset, and runCycle just steps through a single generation.
+	I broke runCycle out from run so I could have a method to execute on a timer for animations.
 	###
 	runCycle: ()->
 		for column in [0..@columns]

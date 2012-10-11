@@ -1,3 +1,24 @@
-body p {
+body {
+  padding: 30px;
+}
+header {
+  font-size: 24px;
   font-weight: bold;
+}
+#grid {
+  width: 510px;
+  height: 510px;
+}
+#grid span {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #999999;
+  display: block;
+  float: left;
+}
+#grid .dead {
+  background-color: black;
+}
+#grid .alive {
+  background-color: red;
 }

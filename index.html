@@ -6,8 +6,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Rally Game of Life Test</title>
-        <meta name="description" content="">
+        <title>Josh Barber - Game of Life</title>
+        <meta name="description" content="Write some code that evolves generations through the "Game of life".
+The input will be a game board of cells, either alive (1) or dead (0).">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/site.css">
@@ -17,15 +18,29 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
+        
+        <header>Game of Life</header>
 
-        <!-- Add your site or application content here -->
+        <section id="grid_section"></section>
+        <section id="key">
+            <ul>
+                <li>Red - Alive</li>
+                <li>Black - Dead</li>
+            </ul>
+        </section>
+
+        <navigation>
+            <button id="reset">Reset</button>
+            <button id="advance">Move Forward One Generation</button>
+            <button id="animate">Animate 14 Generations</button>
+        </navigation>
 
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
         <script src="js/life.js"></script>
+        <script src="js/index.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            var _gaq=[['_setAccount','UA-4126112-1'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));

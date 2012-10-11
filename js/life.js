@@ -29,13 +29,16 @@
     };
 
     Life.prototype.run = function() {
-      this.newGrid = this.buildGrid();
+      this.reset();
       return this.runCycle();
     };
 
+    Life.prototype.reset = function() {
+      return this.newGrid = this.buildGrid();
+    };
+
     /*
-    	I broke runCycle out from run so I could have a method to execute on a timer for 
-    	animations.  Run is like a reset, and runCycle just steps through a single generation.
+    	I broke runCycle out from run so I could have a method to execute on a timer for animations.
     */
 
     Life.prototype.runCycle = function() {
