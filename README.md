@@ -1,5 +1,7 @@
 #Game of Life
 
+http://en.wikipedia.org/wiki/Conway's_Game_of_Life
+
 ###Requirements:
 
 Write some code that evolves generations through the "Game of life".
